@@ -26,8 +26,6 @@ int main( int argc, const char** argv )
 		Canny(edges, edges, 0, 30, 3);
 		imshow("Edges", edges);
 		if (waitKey(30) >= 0) break;
-
-		
 	}
 
 	return 0;
