@@ -16,16 +16,21 @@ int main( int argc, const char** argv )
 	if (!cap.isOpened()) return -1;
 
 	Mat edges;
-	namedWindow("Edges", 1);
+	//namedWindow("Edges", WINDOW_OPENGL);
+	namedWindow("original", 1);
+	namedWindow("blurred", 1);
 
 	for (;;) {
-		Mat frame;
+		Mat frame, blurred;
 		cap >> frame;
-		cvtColor(frame, edges, COLOR_BGR2GRAY);
-		GaussianBlur(edges, edges, Size(7,7), 1.5, 1.5);
-		Canny(edges, edges, 0, 30, 3);
-		imshow("Edges", edges);
-		if (waitKey(30) >= 0) break;
+		cvtColor(frame, frame, COLOR_BGR2GRAY);
+		GaussianBlur(frame, blurred, Size(7,7), 1.5, 1.5);
+		Canny(frame, frame, 0, 30, 3);
+		Canny(blurred, blurred, 0, 30, 3);
+		imshow("original", frame);
+		imshow("blurred", blurred);
+		//imshow("Edges", edges);
+		if (waitKey(30) > 0) break;
 	}
 
 	return 0;
